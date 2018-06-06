@@ -197,7 +197,7 @@ function checkKeys() {
 
     if (keyCode === UP_ARROW && bold.sy >= 0) {
       if(bold.sy < 1){
-      bold.sy = window.innerWidth - window.innerWidth-window.innerWidth*0.004
+      bold.sy = window.innerWidth - window.innerWidth-window.innerWidth*0.0033
     }
 }     
   }
