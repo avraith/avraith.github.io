@@ -1,4 +1,4 @@
-var tal= 1000
+var tal= 0
 var x=200
 var y= 200
 var r;
