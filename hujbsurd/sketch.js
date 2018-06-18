@@ -65,7 +65,7 @@ function draw() {
         if(mouseIsPressed){
   if(mouseX>width-200&&mouseX<width&&mouseY>100&&mouseY<200&&tal>psp-1){
   	tal= tal -psp;
-    psp= psp+20
+    psp= psp+10
     ps+=1;
   	}
   
