@@ -1,4 +1,4 @@
-var tal= 0
+var tal= 1000
 var x=200
 var y= 200
 var r;
@@ -18,8 +18,8 @@ function draw() {
   background(220);
   tal=Math.round(tal)
   
-  r= random(0,width-300)
-  r2= random(0,height-100)
+  r= random(0,width-400)
+  r2= random(0,height-150)
   
   fill(20,200,10)
   rect(width-200,100,200,100)
@@ -27,12 +27,14 @@ function draw() {
    rect(width-200,200,200,100)
   
   fill(2000,30,100)
- rect(x,y,100,50)
+ rect(x,y,200,150)
   
     fill(0,0,0)
   textSize(20)
     text(tal+' hujbsurd',10,20);
- 	  text('hujbsurd',x+10,y+30)
+  	textSize(40);
+ 	  text('hujbsurd',x+20,y+80)
+  	textSize(20);
   text('hujbsurd '+t+'pc',width-170,30)
   text(pp+' hujbsurd',width-170,75)
     text(ps+' hujbsurd ps',width-170,130)
@@ -45,7 +47,7 @@ function draw() {
     oldsec=second();
   }
   if(mouseIsPressed){
-  if(mouseX>x&&mouseX<x+100&&mouseY>y&&mouseY<y+50){
+  if(mouseX>x&&mouseX<x+200&&mouseY>y&&mouseY<y+150){
   tal= tal +t
     x=r
     y=r2
@@ -57,8 +59,8 @@ function draw() {
     if(mouseIsPressed){
   if(mouseX>width-200&&mouseX<width&&mouseY>0&&mouseY<100&&tal>pp-1){
   tal= tal -pp
-    t=t*2
-    pp=pp+pp
+    t=round(t*1.5)
+    pp=round(pp*1.8)
   	}
         if(mouseIsPressed){
   if(mouseX>width-200&&mouseX<width&&mouseY>100&&mouseY<200&&tal>psp-1){
