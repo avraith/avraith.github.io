@@ -9,18 +9,14 @@
   <p id="greeting"></p>
 
   <script>
-    // Read username and code from localStorage
     const username = localStorage.getItem('username');
     const code = localStorage.getItem('code');
 
     if (!username || !code) {
-      // If not found, redirect back to login
       window.location.href = './index.html';
     } else {
       const greetingEl = document.getElementById('greeting');
       greetingEl.textContent = `Hej, ${username}! Velkommen 👋`;
-
-      // You can now use "code" here for your logic
       console.log('User code:', code);
     }
   </script>
