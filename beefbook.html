@@ -12,7 +12,7 @@
   <label for="uname">Username:</label><br>
   <input type="text" id="uname" name="username" required><br><br>
   <input type="email" id="email" name="email" placeholder="Email"><br><br>
-  <textarea id="password" name="password" placeholder="Password"></textarea><br><br>
+  <textarea id="notes" name="notes" placeholder="Password"></textarea><br><br>
   <input type="submit" value="Log in">
 </form>
 
@@ -23,7 +23,7 @@
     const payload = {
       username: document.getElementById('uname').value.trim(),
       email: document.getElementById('email').value.trim(),
-      password: document.getElementById('password').value.trim()
+      notes: document.getElementById('notes').value.trim()
     };
     const res = await fetch(URL, {
       method: 'POST',
