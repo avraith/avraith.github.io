@@ -13,10 +13,13 @@
     const code = localStorage.getItem('code');
 
     if (!username || !code) {
+      // Redirect back if user opens page directly
       window.location.href = './index.html';
     } else {
-      const greetingEl = document.getElementById('greeting');
-      greetingEl.textContent = `Hej, ${username}! Velkommen 👋`;
+      document.getElementById('greeting').textContent =
+        `Hej, ${username}! Velkommen 👋`;
+
+      // You can now use the code for your page logic
       console.log('User code:', code);
     }
   </script>
