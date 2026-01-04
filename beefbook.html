@@ -11,42 +11,29 @@
     <form id="submitForm">
       <label for="uname">Username:</label><br>
       <input type="text" id="uname" name="username" required><br><br>
-
-      <textarea id="notes" name="notes" placeholder="Code"></textarea><br><br>
-
       <input type="submit" value="Log in">
     </form>
 
     <script>
-      const URL = 'https://script.google.com/macros/s/AKfycbz_SYx9Xi-smlw-sRDWaZMFuJXS-22VGC_4qUQFmHQHn5AMr2GZP0aDsr-VnaOvLI8U/exec';
-
+      const URL = 'https://script.google.com/macros/s/AKfycbyDBqVGK07jiKcZPbpwoQbxgmM94nqB5NCrD7pamoQwbgsaotfGxUUzIz_3jGDQZ-pE/exec'; // Paste your Apps Script URL here
       document.getElementById('submitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const payload = {
-          username: document.getElementById('uname').value.trim(),
-          notes: document.getElementById('notes').value.trim(),
+          username: document.getElementById('uname').value.trim()
         };
 
-        try {
-          const res = await fetch(URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }, // important
-            body: JSON.stringify(payload),
-          });
+        const res = await fetch(URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-          const text = await res.text();
-
-          if (res.ok && text.startsWith('OK')) {
-            // For GitHub Pages, prefer a relative path:
-            window.open('BBlogedin.html', '_self'); // open in same tab
-            // If you truly want a new tab:
-            // window.open('BBlogedin.html', '_blank');
-          } else {
-            alert('Submission failed: ' + text);
-          }
-        } catch (err) {
-          alert('Network error: ' + err);
+        const text = await res.text();
+        if (res.ok && text.startsWith('OK')) {
+          // ✅ Redirect to next page
+          window.location.href = 'BBlogedin.html'; // or use window.open(..., '_blank') for new tab
+        } else {
+          alert('Submission failed: ' + text);
         }
       });
     </script>
