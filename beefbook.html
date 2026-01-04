@@ -5,54 +5,36 @@
   <title>BeefBook</title>
 </head>
 <body style="background-color: Violet;">
-  <h1 style="font-family: Verdana;">BeefBook1</h1>
+  <h1 style="font-family: Verdana;">BeefBook</h1>
 
-  <form id="submitForm">
+  <form id="submitForm" action="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE" method="POST">
     <label>Username:</label><br>
-    <input type="text" id="uname" name="username" required><br><br>
+    <input type="text" name="username" id="uname" required><br><br>
 
     <label>Code:</label><br>
-    <textarea id="code" name="password" required></textarea><br><br>
+    <textarea name="password" id="code" required></textarea><br><br>
 
     <input type="submit" value="Submit">
   </form>
 
   <script>
-    const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
-
-    document.getElementById('submitForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
+    // Save locally on submit, then let the form POST normally
+    document.getElementById('submitForm').onsubmit = function() {
       const uname = document.getElementById('uname').value.trim();
       const code = document.getElementById('code').value.trim();
 
-      // 1️⃣ Save locally
+      // Save to localStorage for logged-in page
       localStorage.setItem('username', uname);
       localStorage.setItem('code', code);
 
-      // 2️⃣ Create a hidden form to submit to Google Sheets
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = URL;
+      // Redirect after a short delay to ensure form submission completes
+      setTimeout(() => {
+        window.location.href = './BBlogedin.html';
+      }, 300);
 
-      const inputUser = document.createElement('input');
-      inputUser.type = 'hidden';
-      inputUser.name = 'username';
-      inputUser.value = uname;
-      form.appendChild(inputUser);
-
-      const inputCode = document.createElement('input');
-      inputCode.type = 'hidden';
-      inputCode.name = 'password';
-      inputCode.value = code;
-      form.appendChild(inputCode);
-
-      document.body.appendChild(form);
-      form.submit();
-
-      // 3️⃣ Redirect to logged-in page immediately (same tab)
-      window.location.href = './BBlogedin.html';
-    });
+      // Allow form to submit normally to Google Apps Script
+      return true;
+    };
   </script>
 </body>
 </html>
