@@ -31,6 +31,11 @@
     });
     alert(await res.text()); // Shows "OK" if successful
   });
+  
+if (res.ok) {
+  window.open('/BBlogedin.html', '_self'); // new tab
+}
+
 </script>
 
   
