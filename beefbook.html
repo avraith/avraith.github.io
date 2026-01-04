@@ -18,7 +18,7 @@
     </form>
 
     <script>
-      const URL = 'https://script.google.com/macros/s/AKfycbwTQmm1nU4zAch4IvQFrGfeIWwHQjtJ0N8AJt_ba_Pb8tXzPlKu5WMmzfLZ8fUEFEtP/exec';
+      const URL = 'https://script.google.com/macros/s/AKfycbwAp4nOyy1-NmGRdypXd598iaGnW7RUuR3D2ZEAjRUAzWTxPGvo-MlPhiKR9FYXHpUP/exec';
 
       document.getElementById('submitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -31,11 +31,16 @@
         try {
           const res = await fetch(URL, {
             method: 'POST',
-            body: JSON.stringify(payload) // 🔴 NO headers
+            body: JSON.stringify(payload)
           });
 
           const text = await res.text();
           alert(text);
+
+          if (text === 'OK') {
+            window.location.href = 'BBlogedin.html';
+          }
+
         } catch (err) {
           alert('Fetch error: ' + err);
         }
