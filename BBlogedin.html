@@ -1,25 +1,20 @@
 
 <!doctype html>
-<html lang="da">
+<html>
   <head>
-    <meta charset="utf-8" />
-    <title>BeefBook – Logget ind</title>
+    <title>BeefBook – Logged in</title>
   </head>
   <body style="background-color:Violet;">
     <h1 style="font-family:verdana;">BeefBook</h1>
     <p id="greeting"></p>
 
     <script>
-      // Parse querystringen, fx ?uname=Albert
       const params = new URLSearchParams(window.location.search);
-      const username = params.get('uname'); // -> 'Albert' eller null
-
+      const username = params.get('uname');
       const greetingEl = document.getElementById('greeting');
-      if (username && username.trim() !== '') {
-        greetingEl.textContent = `Hej, ${username}! Velkommen 👋`;
-      } else {
-        greetingEl.textContent = 'Ingen brugernavn modtaget.';
-      }
+      
+      greetingEl.textContent = `Hej, ${username}! Velkommen 👋`;
+
     </script>
   </body>
 </html>
