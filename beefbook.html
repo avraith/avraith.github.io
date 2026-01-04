@@ -13,5 +13,15 @@
     <input type="submit" value="Submit">
   </form>
   
+<script>
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = unameInput.value.trim();
+    localStorage.setItem('username', username); // gem lokalt i browseren
+    alert(`Gemt som: ${localStorage.getItem('username')}`);
+  });
+</script>
+
+  
 </body> 
 </html>
