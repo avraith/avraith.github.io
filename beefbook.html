@@ -1,44 +1,45 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>BeefBook</title>
-  </head>
-  <body style="background-color: Violet;">
-    <h1 style="font-family: Verdana;">BeefBook</h1>
+<head>
+  <meta charset="utf-8" />
+  <title>BeefBook</title>
+</head>
+<body style="background-color: Violet;">
+  <h1 style="font-family: Verdana;">BeefBook</h1>
 
-    <form id="submitForm">
-      <label>Username:</label><br>
-      <input type="text" id="uname" required><br><br>
+  <form id="submitForm">
+    <label>Username:</label><br>
+    <input type="text" id="uname" required><br><br>
 
-      <label>Code:</label><br>
-      <textarea id="code" required></textarea><br><br>
+    <label>Code:</label><br>
+    <textarea id="code" required></textarea><br><br>
 
-      <input type="submit" value="Submit">
-    </form>
+    <input type="submit" value="Submit">
+  </form>
 
-    <script>
-      const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  <script>
+    const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-      document.getElementById('submitForm').addEventListener('submit', (e) => {
-        e.preventDefault();
+    document.getElementById('submitForm').addEventListener('submit', (e) => {
+      e.preventDefault();
 
-        const uname = document.getElementById('uname').value.trim();
-        const code = document.getElementById('code').value.trim();
+      const uname = document.getElementById('uname').value.trim();
+      const code = document.getElementById('code').value.trim();
 
-        // Store username in sessionStorage
-        sessionStorage.setItem('username', uname);
+      // Store username and code in localStorage
+      localStorage.setItem('username', uname);
+      localStorage.setItem('code', code);
 
-        // Send to Google Sheets (fire-and-forget)
-        fetch(URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify({ username: uname, password: code })
-        });
-
-        // Redirect to logged-in page
-        window.location.href = 'BBlogedin.html';
+      // Send to Google Sheets
+      fetch(URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ username: uname, password: code })
       });
-    </script>
-  </body>
+
+      // Redirect to logged-in page
+      window.location.href = './BBlogedin.html';
+    });
+  </script>
+</body>
 </html>
