@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head> 
+    <script> 
+      function myFunction() { 
+          var r=Math.floor(Math.random()*255);
+          var g=Math.floor(Math.random()*255);
+          var b=Math.floor(Math.random()*255);
+          document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+          r=Math.floor(Math.random()*255);
+          g=Math.floor(Math.random()*255); 
+          b=Math.floor(Math.random()*255);
+          document.getElementByClass("knap").backgroundColor = "rgb("+r+","+g+","+b+")";
+      } 
+    </script> 
+    <style>
+      .knap {
+        border: none;
+        background-color: rgb(255,100,0);
+      } 
+    </style>
+  </head> 
+  <body>
+    <button onclick="myFunction()" class="knap">Skift farve</button>
+  </body>
+</html>
