@@ -1,46 +1,45 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>BeefBook</title>
-</head>
-<body style="background-color: Violet;">
-  <h1 style="font-family: Verdana;">BeefBook2</h1>
+  <head>
+    <meta charset="utf-8" />
+    <title>BeefBook</title>
+  </head>
+  <body style="background-color: Violet;">
+    <h1 style="font-family: Verdana;">BeefBook</h1>
 
-  <form id="submitForm">
-    <label>Username:</label><br>
-    <input type="text" id="uname" required><br><br>
+    <form id="submitForm">
+      <label>Username:</label><br>
+      <input type="text" id="uname" required><br><br>
 
-    <label>Code:</label><br>
-    <textarea id="code" required></textarea><br><br>
+      <label>Code:</label><br>
+      <textarea id="code" required></textarea><br><br>
 
-    <input type="submit" value="Submit">
-  </form>
+      <input type="submit" value="Submit">
+    </form>
 
-  <script>
-  document.getElementById('submitForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+    <script>
+      const URL = 'https://script.google.com/macros/s/AKfycbwAp4nOyy1-NmGRdypXd598iaGnW7RUuR3D2ZEAjRUAzWTxPGvo-MlPhiKR9FYXHpUP/exec';
 
-    const uname = document.getElementById('uname').value.trim();
-    const code = document.getElementById('code').value.trim();
+      document.getElementById('submitForm').addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    // Save locally for logged-in page
-    localStorage.setItem('username', uname);
-    localStorage.setItem('code', code);
+        const uname = document.getElementById('uname').value.trim();
+        const code = document.getElementById('code').value.trim();
 
-    // Send to Sheets (your working fetch)
-    fetch('YOUR_GOOGLE_SCRIPT_URL_HERE', {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({ username: uname, password: code })
-    });
+        // 1️⃣ Save locally first
+        localStorage.setItem('username', uname);
+        localStorage.setItem('code', code);
 
-    // Delay redirect slightly to ensure fetch actually fires
-    setTimeout(() => {
-      window.location.href = './BBlogedin.html';
-    }, 500); // half a second is plenty
-  });
-</script>
+        // 2️⃣ Fire the fetch (no-cors)
+        fetch(URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({ username: uname, password: code })
+        });
 
-</body>
+        // 3️⃣ Redirect immediately
+        window.location.href = 'BBlogedin.html';
+      });
+    </script>
+  </body>
 </html>
