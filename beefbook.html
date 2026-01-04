@@ -1,47 +1,54 @@
+
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>BeefBook</title>
   </head>
-<body style= "background-color:Violet;">
-  
-<h1 style= "font-family:verdana;">BeefBook</h1>
+  <body style="background-color: Violet;">
+    <h1 style="font-family: Verdana;">BeefBook</h1>
 
-  
-<form id="submitForm">
-  <label for="uname">Username:</label><br>
-  <input type="text" id="uname" name="username" required><br><br>
-  <textarea id="notes" name="notes" placeholder="Code"></textarea><br><br>
-  <input type="submit" value="Log in">
-</form>
+    <form id="submitForm">
+      <label for="uname">Username:</label><br>
+      <input type="text" id="uname" name="username" required><br><br>
 
-<script>
-  const URL = 'https://script.google.com/macros/s/AKfycbz_SYx9Xi-smlw-sRDWaZMFuJXS-22VGC_4qUQFmHQHn5AMr2GZP0aDsr-VnaOvLI8U/exec';
-  document.getElementById('submitForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const payload = {
-      username: document.getElementById('uname').value.trim(),
-      notes: document.getElementById('notes').value.trim()
-    };
-    const res = await fetch(URL, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-      
-    });
-    alert(await res.text()); // Shows "OK" if successful
-    if (res.ok) {
-  window.open('/BBlogedin.html', '_self');
-  });
-  
+      <textarea id="notes" name="notes" placeholder="Code"></textarea><br><br>
 
-}
+      <input type="submit" value="Log in">
+    </form>
 
-</script>
+    <script>
+      const URL = 'https://script.google.com/macros/s/AKfycbz_SYx9Xi-smlw-sRDWaZMFuJXS-22VGC_4qUQFmHQHn5AMr2GZP0aDsr-VnaOvLI8U/exec';
 
-  
+      document.getElementById('submitForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
+        const payload = {
+          username: document.getElementById('uname').value.trim(),
+          notes: document.getElementById('notes').value.trim(),
+        };
 
+        try {
+          const res = await fetch(URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }, // important
+            body: JSON.stringify(payload),
+          });
 
-  
-</body> 
+          const text = await res.text();
+
+          if (res.ok && text.startsWith('OK')) {
+            // For GitHub Pages, prefer a relative path:
+            window.open('BBlogedin.html', '_self'); // open in same tab
+            // If you truly want a new tab:
+            // window.open('BBlogedin.html', '_blank');
+          } else {
+            alert('Submission failed: ' + text);
+          }
+        } catch (err) {
+          alert('Network error: ' + err);
+        }
+      });
+    </script>
+  </body>
 </html>
