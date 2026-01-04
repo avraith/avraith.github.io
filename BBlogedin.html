@@ -9,11 +9,8 @@
     <p id="greeting"></p>
 
     <script>
-      // Read username and code from query parameters
-      const params = new URLSearchParams(window.location.search);
-      const username = params.get('uname');
-      const code = params.get('code'); // optional, only if you need it
-
+      // Read username from sessionStorage
+      const username = sessionStorage.getItem('username') || 'Gæst';
       const greetingEl = document.getElementById('greeting');
       greetingEl.textContent = `Hej, ${username}! Velkommen 👋`;
     </script>
