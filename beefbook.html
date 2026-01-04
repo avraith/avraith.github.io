@@ -8,10 +8,10 @@
     <h1 style="font-family: Verdana;">BeefBook</h1>
 
     <form id="submitForm">
-      <label for="uname">Username:</label><br>
+      <label>Username:</label><br>
       <input type="text" id="uname" required><br><br>
 
-      <label for="code">Code:</label><br>
+      <label>Code:</label><br>
       <textarea id="code" required></textarea><br><br>
 
       <input type="submit" value="Submit">
@@ -31,8 +31,7 @@
         try {
           const res = await fetch(URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload) // 🔴 NO headers
           });
 
           const text = await res.text();
