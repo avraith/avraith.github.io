@@ -7,11 +7,34 @@
   
 <h1 style= "font-family:verdana;">BeefBook</h1>
 
-  <form action="/BBlogedin.html" method="GET" target="_self">
-    <label for="uname">User name:</label><br>
-    <input type="text" id="uname" name="uname"><br>
-    <input type="submit" value="Submit">
-  </form>
+  
+<form id="submitForm">
+  <label for="uname">Username:</label><br>
+  <input type="text" id="uname" name="username" required><br><br>
+  <input type="email" id="email" name="email" placeholder="Email"><br><br>
+  <textarea id="notes" name="notes" placeholder="Notes"></textarea><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  const URL = 'YOUR_WEB_APP_URL_HERE'; // Paste the URL from Apps Script
+  document.getElementById('submitForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      username: document.getElementById('uname').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      notes: document.getElementById('notes').value.trim()
+    };
+    const res = await fetch(URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    alert(await res.text()); // Shows "OK" if successful
+  });
+</script>
+
+  
+
 
 
   
